@@ -1,6 +1,8 @@
 package bstmap;
 
 import static org.junit.Assert.*;
+
+import edu.princeton.cs.algs4.In;
 import org.junit.Test;
 
 /** Tests by Brendan Hu, Spring 2015, revised for 2016 by Josh Hug */
@@ -85,6 +87,20 @@ public class TestBSTMap {
         BSTMap<String, Integer> b = new BSTMap<String, Integer>();
         b.put("hi", null);
         assertTrue(b.containsKey("hi"));
+    }
+
+    @Test
+    public void printInOrderTest() {
+        BSTMap<Integer, Integer> b = new BSTMap<Integer, Integer>();
+        assertEquals(0, b.size());
+        b.put(4, 4);
+        b.put(2, 2);
+        b.put(6, 6);
+        b.put(1, 1);
+        b.put(3, 3);
+        b.put(5, 5);
+        b.put(7, 7);
+        b.printInOrder();
     }
 
     @Test

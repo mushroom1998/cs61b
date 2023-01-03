@@ -105,9 +105,11 @@ public class TestBSTMapExtra {
         assertTrue(((Integer) leftChild.remove('B')).equals(1));
         assertEquals(1, leftChild.size());
         assertEquals(null, leftChild.get('B'));
+        assertEquals(2, leftChild.remove('A', 2));
 
         BSTMap noChild = new BSTMap();
         noChild.put('Z', 15);
+        assertEquals(null, noChild.remove('Z', 10));
         assertTrue(((Integer) noChild.remove('Z')).equals(15));
         assertEquals(0, noChild.size());
         assertEquals(null, noChild.get('Z'));
