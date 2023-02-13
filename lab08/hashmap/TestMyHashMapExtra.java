@@ -3,7 +3,9 @@ package hashmap;
 import static org.junit.Assert.*;
 import org.junit.Test;
 
+import java.lang.reflect.Array;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Set;
 
 /** Tests of optional parts of lab 8. */
@@ -69,5 +71,24 @@ public class TestMyHashMapExtra {
         Set<String> keySet = b.keySet();
         assertTrue(values.containsAll(keySet));
         assertTrue(keySet.containsAll(values));
+    }
+
+    @Test
+    public void testMapIterator() {
+        MyHashMap<String, String> q = new MyHashMap<>();
+        Iterator nullIt = q.iterator();
+        while (nullIt.hasNext()) {
+            nullIt.next();
+        }
+        q.put("c", "a");
+        q.put("b", "a");
+        q.put("a", "a");
+        q.put("d", "a");
+        q.put("f", "a");                         // a b c d   f
+        Iterator it = q.iterator();
+        HashSet<String> actualSet = new HashSet<>();
+        while (it.hasNext()) {
+            actualSet.add((String)it.next());
+        }
     }
 }
