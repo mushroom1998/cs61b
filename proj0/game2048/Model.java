@@ -118,20 +118,21 @@ public class Model extends Observable {
     public void tilt(Side side) {
         // TODO: Fill in this function.
         _board.setViewingPerspective(side);
-        for(int col=0; col< _board.size(); col++) {
+        for(int col=0; col<_board.size(); col++) { //checking every columns
             int lastmerge = 0;
-            for(int row=_board.size()-2; row>=0; row--) {
+            for(int row=_board.size()-2; row>=0; row--) {   //looking up for every rows
                 if(_board.tile(col, row) == null) {
-                    continue;
+                    continue; //find the first non-null item
                 }
                 int nextrow = row + 1;
                 while (nextrow<_board.size() && _board.tile(col, nextrow) == null) {
-                    nextrow++;
+                    nextrow++; //find the next upper items which is not null in the same column
                 }
-                if (nextrow == _board.size() || _board.tile(col, row).value() == _board.tile(col, nextrow).value()) {
+                if (nextrow == _board.size() || //[0,0,0,2] -> [2,0,0,0]
+                        _board.tile(col, row).value() != _board.tile(col, nextrow).value()) { //[4,0,0,2] -> [4,2,0,0]
                     _board.move(col, nextrow-1, _board.tile(col, row));
-                } else if (_board.tile(col, row).value() == _board.tile(col, nextrow).value()) {
-                    if (lastmerge != nextrow) {
+                } else if (_board.tile(col, row).value() == _board.tile(col, nextrow).value()) { //[2,2,0,0] -> [4,0,0,0]
+                    if (lastmerge != nextrow) { //avoid double merge in one time
                         _board.move(col, nextrow, _board.tile(col, row));
                         lastmerge = nextrow;
                         _score += _board.tile(col, nextrow).value();
