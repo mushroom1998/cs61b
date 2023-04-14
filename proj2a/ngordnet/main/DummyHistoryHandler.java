@@ -7,6 +7,7 @@ import ngordnet.plotting.Plotter;
 import org.knowm.xchart.XYChart;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 
 public class DummyHistoryHandler extends NgordnetQueryHandler {
@@ -16,10 +17,6 @@ public class DummyHistoryHandler extends NgordnetQueryHandler {
         System.out.println("Words: " + q.words());
         System.out.println("Start Year: " + q.startYear());
         System.out.println("End Year: " + q.endYear());
-
-        System.out.println("But I'm totally ignoring that and just plotting a parabola\n" +
-                        "and a sine wave, because your job will be to figure out how to\n" +
-                        "actually use the query data.");
 
         TimeSeries parabola = new TimeSeries();
         for (int i = 0; i < 100; i += 1) {

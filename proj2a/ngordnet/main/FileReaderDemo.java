@@ -17,14 +17,22 @@ public class FileReaderDemo {
 
         /* Compare the calls below to the contents of ./ngordnet/main/example_input_file.txt */
 
-        int firstItemInFile = in.readInt();
-        double secondItemInFile = in.readDouble();
-        String thirdItemInFile = in.readString();
-        String fourthItemInFile = in.readString();
-        double fifthItemInFile = in.readDouble();
+//        int firstItemInFile = in.readInt();
+//        double secondItemInFile = in.readDouble();
+//        String thirdItemInFile = in.readString();
+//        String fourthItemInFile = in.readString();
+//        double fifthItemInFile = in.readDouble();
+//
+//
+//        System.out.println("The file contained "  + firstItemInFile + ", " +
+//                secondItemInFile + ", " + thirdItemInFile + ", " +
+//                fourthItemInFile + ", and " + fifthItemInFile);
 
-        System.out.println("The file contained "  + firstItemInFile + ", " +
-                secondItemInFile + ", " + thirdItemInFile + ", " +
-                fourthItemInFile + ", and " + fifthItemInFile);
+        while(in.hasNextLine()) {
+            int firstItemInFile = in.readInt();
+            double secondItemInFile = in.readDouble();
+            System.out.println("The file contained "  + firstItemInFile + ", " + secondItemInFile);
+            in.readLine();
+        }
     }
 }

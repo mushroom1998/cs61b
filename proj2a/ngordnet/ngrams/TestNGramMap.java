@@ -41,6 +41,50 @@ public class TestNGramMap {
     }
 
     @Test
+    public void testTotalCountHistory() {
+        NGramMap ngm = new NGramMap("./data/ngrams/very_short.csv", "./data/ngrams/total_counts.csv");
+
+        TimeSeries totalCounts = ngm.totalCountHistory();
+        assertEquals(529, totalCounts.size());
+        assertEquals(2563919231.0, totalCounts.get(1865), 1E-10);
+    }
+
+    @Test
+    public void testWeightHistory() {
+        NGramMap ngm = new NGramMap("./data/ngrams/very_short.csv", "./data/ngrams/total_counts.csv");
+
+        TimeSeries wordWeight = ngm.weightHistory("request");
+        assertEquals(646179.0/26609986084.0, wordWeight.get(2005), 1E-7);
+
+        TimeSeries wordWeight2006to2007 = ngm.weightHistory("request", 2006, 2007);
+
+        List<Integer> expectedYears = new ArrayList<>(Arrays.asList(2006, 2007));
+        List<Double> expectedWeights = new ArrayList<>(Arrays.asList(677820.0/27695491774.0, 697645.0/28307904288.0));
+        assertEquals(expectedYears, wordWeight2006to2007.years());
+        for (int i = 0; i < expectedWeights.size(); i += 1) {
+            assertEquals(expectedWeights.get(i), wordWeight2006to2007.data().get(i), 1E-10);
+        }
+    }
+
+    @Test
+    public void testSummedWeightHistory() {
+        NGramMap ngm = new NGramMap("./data/ngrams/very_short.csv", "./data/ngrams/total_counts.csv");
+
+        List<String> words = new ArrayList<>();
+        words.add("request");
+        words.add("wandered");
+
+        TimeSeries summedWeight = ngm.summedWeightHistory(words);
+        assertEquals((646179.0+83769.0)/26609986084.0, summedWeight.get(2005), 1E-10);
+
+        TimeSeries summedWeight2006to2007 = ngm.summedWeightHistory(words, 2006, 2007);
+        List<Double> expectedWeights = new ArrayList<>(Arrays.asList((677820.0+87688.0)/27695491774.0, (697645.0+108634.0)/28307904288.0));
+        for (int i = 0; i < expectedWeights.size(); i += 1) {
+            assertEquals(expectedWeights.get(i), summedWeight2006to2007.data().get(i), 1E-10);
+        }
+    }
+
+    @Test
     public void testOnLargeFile() {
         // creates an NGramMap from a large dataset
         NGramMap ngm = new NGramMap("./data/ngrams/top_14377_words.csv",
