@@ -2,6 +2,7 @@ package ngordnet.main;
 
 import ngordnet.hugbrowsermagic.HugNgordnetServer;
 import ngordnet.ngrams.NGramMap;
+import ngordnet.wordnet.WordNetDataSet;
 
 public class Main {
     public static void main(String[] args) {
@@ -13,9 +14,12 @@ public class Main {
         String hyponymFile = "./data/wordnet/hyponyms.txt";
 
         NGramMap ngm = new NGramMap(wordFile, countFile);
+        WordNetDataSet wnds = new WordNetDataSet(hyponymFile, synsetFile);
 
         hns.startUp();
         hns.register("history", new HistoryHandler(ngm));
         hns.register("historytext", new HistoryTextHandler(ngm));
+        hns.register("hyponyms", new HyponymsHandler(ngm, wnds));
+        hns.register("hypohist", new HypohistHandler(ngm, wnds));
     }
 }

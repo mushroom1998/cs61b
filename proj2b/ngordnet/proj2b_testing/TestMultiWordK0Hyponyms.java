@@ -12,7 +12,7 @@ import static org.junit.Assert.assertEquals;
 /** Tests the case where the list of words is length greater than 1, but k is still zero. */
 public class TestMultiWordK0Hyponyms {
     // this case doesn't use the NGrams dataset at all, so the choice of files is irrelevant
-    public static final String WORDS_FILE = "data/ngrams/very_short.csv";
+    public static final String WORDS_FILE = "data/ngrams/top_49887_words.csv";
     public static final String TOTAL_COUNTS_FILE = "data/ngrams/total_counts.csv";
     public static final String SMALL_SYNSET_FILE = "data/wordnet/synsets16.txt";
     public static final String SMALL_HYPONYM_FILE = "data/wordnet/hyponyms16.txt";
@@ -54,7 +54,8 @@ public class TestMultiWordK0Hyponyms {
 
         NgordnetQuery nq = new NgordnetQuery(words, 0, 0, 0);
         String actual = studentHandler.handle(nq);
-        String expected = "You have to fill in this text yourself. Hint: COPY FROM THE SPEC!";
+        String expected = "[amazon, bird, cat, chick, dam, demoiselle, female, female_mammal, filly, hag, hen, " +
+                "nanny, nymph, siren]";
         assertEquals(expected, actual);
     }
 
@@ -65,11 +66,12 @@ public class TestMultiWordK0Hyponyms {
 
         NgordnetQueryHandler studentHandler = AutograderBuddy.getHyponymHandler(
                 WORDS_FILE, TOTAL_COUNTS_FILE, LARGE_SYNSET_FILE, LARGE_HYPONYM_FILE);
-        List<String> words = null; // <-- replace with the appropriate list of words!
+        List<String> words = List.of("female", "leader");
 
         NgordnetQuery nq = new NgordnetQuery(words, 0, 0, 0);
         String actual = studentHandler.handle(nq);
-        String expected = "You have to fill in this text yourself. Hint: COPY FROM THE SPEC!";
+        String expected = "[crown_princess, marchioness, materfamilias, matriarch, mayoress, mistress, " +
+                "vicereine, viscountess]";
         assertEquals(expected, actual);
     }
 

@@ -12,7 +12,7 @@ import static org.junit.Assert.assertEquals;
 /** Tests the most basic case for Hyponyms where the list of words is one word long, and k = 0.*/
 public class TestOneWordK0Hyponyms {
     // this case doesn't use the NGrams dataset at all, so the choice of files is irrelevant
-    public static final String WORDS_FILE = "data/ngrams/very_short.csv";
+    public static final String WORDS_FILE = "data/ngrams/top_49887_words.csv";
     public static final String TOTAL_COUNTS_FILE = "data/ngrams/total_counts.csv";
     public static final String SMALL_SYNSET_FILE = "data/wordnet/synsets16.txt";
     public static final String SMALL_HYPONYM_FILE = "data/wordnet/hyponyms16.txt";
